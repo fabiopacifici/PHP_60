@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav .nav-link {
+  padding: 1.5rem 1rem;
+  color: gray;
+  border-bottom: 4px solid transparent;
+}
+
+nav a:hover,
+a.active {
+  color: cornflowerblue;
+  border-bottom: 4px solid cornflowerblue;
+}
