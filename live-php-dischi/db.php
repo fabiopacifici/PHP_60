@@ -90,10 +90,25 @@ function filterData($data)
       return $element['genre'] === $_GET['genre'];
     });
   }
+  return $disks;
+}
+
+$genres = array_map(function ($element) {
+  return $element['genre'];
+}, $dataArray);
+array_unique($genres);
+
+function getGenres($data)
+{
+  $genres = array_map(function ($element) {
+    return $element['genre'];
+  }, $data);
+  $uniqueGenres = array_unique($genres);
+  //var_dump($uniqueGenres);
+  return $uniqueGenres;
 }
 
 
-
+$genres = getGenres($dataArray);
 $disks = filterData($dataArray);
-//var_dump($disks);
-//die();
+

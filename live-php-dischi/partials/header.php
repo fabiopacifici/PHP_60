@@ -8,10 +8,11 @@
 
       <select name="genre" id="genre">
         <option value="">All genres</option>
-        <option value="Rock">Rock</option>
-        <option value="Pop">Pop</option>
-        <option value="Jazz">Jazz</option>
-        <option value="Metal">Metal</option>
+        <?php foreach ($genres as $genre) : ?>
+          <option value="<?= $genre ?>"><?= $genre ?></option>
+        <?php endforeach; ?>
+
+
       </select>
 
       <button type="submit">Filter</button>

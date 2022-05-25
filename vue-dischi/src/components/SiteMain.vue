@@ -44,7 +44,7 @@ export default {
     callApi() {
       axios.get("http://live-php-dischi.test/api.php").then(response => {  
         console.log(response);
-        this.discs = response.data;
+        this.discs = response.data.disks;
         this.loading = false;
         state.genres = this.getGenres();   
       }).catch(error => {
