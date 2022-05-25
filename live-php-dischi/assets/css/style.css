@@ -1,0 +1,13 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+
+.disk {
+  min-height: 450px;
+}
+
+.disk img {
+  aspect-ratio: 1/1;
+}
