@@ -1,38 +1,50 @@
 <?php
 require_once __DIR__ . '/Models/Posts.php';
-# Establish a db connection
-$mysqli = new mysqli('localhost', 'fab', 'password', 'php_blog', 3307);
+require_once __DIR__ . '/Models/Categories.php';
 
-//var_dump($mysqli);
 
-# make the first test query
+$posts = Posts::all();
+//$cats = Categories::all();
 
-/* $restults = $mysqli->query('SELECT * from posts')->fetch_all();
-var_dump($restults); */
+//var_dump($posts);
+//var_dump($cats);
+session_start();
+if ($_SESSION['message']) :
+  $msg = $_SESSION['message'];
+  echo "
+<div class='alert alert-primary alert-dismissible fade show' role='alert'>
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+  <strong>Message</strong> $msg
+</div>
+";
+endif;
+session_destroy();
 
-# Fetch results as an object
+require_once __DIR__ . '/Layout/head.php';
+?>
 
-// 2. fare la query
-$response = $mysqli->query('SELECT * from posts');
-//var_dump($response);  // num_rows => 14
-// 3. verifica il reponso
+<main>
+  <div class="p-5 bg-light mb-5">
+    <div class="container">
+      <h1 class="display-3">Welcome to my Blog</h1>
+      <p class="lead">Lorem, ipsum dolor.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <?php foreach ($posts as $post) : ?>
+        <div class="col">
+          <div class="card">
+            <img class="img-fluid" src="<?= $post->image; ?>" alt="<?= $post->title; ?> Cover image">
+            <div class="card-body">
+              <h3><?= $post->title; ?></h3>
+              <a href="#">Read more</a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
 
-$posts = [];
-if ($response && $response->num_rows > 0) {
-  //var_dump('Ci sono dei records');
-
-  for ($i = 0; $i < $response->num_rows; $i++) {
-    # code...
-    array_push(
-      $posts,
-      $response->fetch_object('Posts', ['id', 'title', 'content', 'image'])
-    );
-  }
-}
-
-var_dump($posts);
-
-$mysqli->close();
-
-## Approccio OOP
-//$posts = Posts::all();
+    </div>
+  </div>
+</main>
+<?php require_once __DIR__ . '/Layout/footer.php';
